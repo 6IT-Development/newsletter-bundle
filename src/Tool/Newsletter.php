@@ -204,7 +204,13 @@ class Newsletter
 
     protected static function obfuscateEmail(string $email): string
     {
-        return substr_replace($email, '.xxx', strrpos($email, '.'));
+        $offset = strrpos($email, '.');
+	    $offsetAt = strrpos($email, '@');
+        if ($offset !== false && $offsetAt !== false && $offset > $offsetAt) {
+            return substr_replace($email, '.xxxx', $offset);
+        }
+        // if the email address is too broken to be obfuscated, just return it
+        return $email;
     }
 
     protected function getClassName(): string
