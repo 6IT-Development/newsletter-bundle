@@ -62,9 +62,6 @@ class DefaultAdapter implements AddressSourceAdapterInterface
         return $this->list;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMailAddressesForBatchSending(): array
     {
         if (!$this->class) {
@@ -91,9 +88,6 @@ class DefaultAdapter implements AddressSourceAdapterInterface
         return $containers;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParamsForTestSending(string $emailAddress): SendingParamContainer
     {
         if ($this->class) {
@@ -126,9 +120,6 @@ class DefaultAdapter implements AddressSourceAdapterInterface
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTotalRecordCount(): int
     {
         if ($this->class) {
@@ -138,9 +129,6 @@ class DefaultAdapter implements AddressSourceAdapterInterface
         return $this->elementsTotal;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParamsForSingleSending(int $limit, int $offset): array
     {
         if (!$this->class) {

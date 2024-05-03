@@ -41,7 +41,6 @@ class Newsletter
     protected DataObject\ClassDefinition $class;
 
     /**
-     * @param string $classId
      *
      * @throws Exception
      */
@@ -63,11 +62,7 @@ class Newsletter
     }
 
     /**
-     * @param NewsletterDocument $newsletterDocument
-     * @param SendingParamContainer|null $sendingContainer
-     * @param string|null $hostUrl
      *
-     * @return Mail
      *
      * @throws Exception
      */
@@ -150,8 +145,6 @@ class Newsletter
     }
 
     /**
-     * @param Mail $mail
-     * @param SendingParamContainer $sendingContainer
      *
      * @throws Exception
      */
@@ -235,9 +228,7 @@ class Newsletter
     }
 
     /**
-     * @param array $params
      *
-     * @return DataObject\Concrete
      *
      * @throws Exception
      */
@@ -302,9 +293,6 @@ class Newsletter
     }
 
     /**
-     * @param DataObject\Concrete $object
-     * @param Email $mailDocument
-     * @param array $params
      *
      * @throws Exception
      */
@@ -365,9 +353,7 @@ class Newsletter
     }
 
     /**
-     * @param string $token
      *
-     * @return bool
      *
      * @throws Exception
      */
@@ -394,9 +380,7 @@ class Newsletter
     }
 
     /**
-     * @param string $token
      *
-     * @return bool
      *
      * @throws Exception
      */
@@ -412,9 +396,7 @@ class Newsletter
     }
 
     /**
-     * @param string $email
      *
-     * @return bool
      *
      * @throws Exception
      */
@@ -434,9 +416,7 @@ class Newsletter
     }
 
     /**
-     * @param DataObject\Concrete $object
      *
-     * @return bool
      *
      * @throws Exception
      */
@@ -473,9 +453,7 @@ class Newsletter
      * Checks if e-mail address already
      * exists in the database.
      *
-     * @param array $params
      *
-     * @return bool
      */
     public function isEmailExists(array $params): bool
     {
@@ -501,9 +479,7 @@ class Newsletter
     /**
      * Checks if domain of email has a MX record
      *
-     * @param string $email
      *
-     * @return bool
      */
     public static function to_domain_exists(string $email): bool
     {

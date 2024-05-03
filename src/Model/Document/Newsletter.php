@@ -25,9 +25,6 @@ use Pimcore\Model\Document\Email;
  */
 class Newsletter extends Email
 {
-    /**
-     * {@inheritdoc}
-     */
     protected string $type = 'newsletter';
 
     /**
@@ -78,15 +75,11 @@ class Newsletter extends Email
      */
     protected string $sendingMode = NewsletterTool::SENDING_MODE_SINGLE;
 
-    /**
-     * {@inheritdoc}
-     */
     protected bool $supportsContentMain = false;
 
     /**
      * Contains the email subject
      *
-     * @param string $subject
      *
      * @return $this
      */
@@ -100,7 +93,6 @@ class Newsletter extends Email
     /**
      * Returns the email subject
      *
-     * @return string
      */
     public function getSubject(): string
     {
@@ -110,7 +102,6 @@ class Newsletter extends Email
     /**
      * Sets the "from" email address
      *
-     * @param string $from
      *
      * @return $this
      */
@@ -124,7 +115,6 @@ class Newsletter extends Email
     /**
      * Contains the email plain text part
      *
-     * @param string $plaintext
      *
      * @return $this
      */
@@ -138,7 +128,6 @@ class Newsletter extends Email
     /**
      * Returns the email plain text part
      *
-     * @return string
      */
     public function getPlaintext(): string
     {
@@ -148,7 +137,6 @@ class Newsletter extends Email
     /**
      * Returns the "from" email address
      *
-     * @return string
      */
     public function getFrom(): string
     {
@@ -188,7 +176,6 @@ class Newsletter extends Email
     /**
      * returns key by default
      *
-     * @return string|null
      */
     public function getTrackingParameterName(): ?string
     {
@@ -217,7 +204,6 @@ class Newsletter extends Email
     /**
      * @internal
      *
-     * @return string
      */
     public function getTmpStoreId(): string
     {

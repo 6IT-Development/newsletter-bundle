@@ -21,22 +21,18 @@ class SendingParamContainer
     /**
      * @internal
      *
-     * @var string
      */
     protected string $email;
 
     /**
      * @internal
      *
-     * @var array|null
      */
     protected ?array $params = null;
 
     /**
      * SendingParamContainer constructor.
      *
-     * @param string $email
-     * @param array|null $params
      */
     public function __construct(string $email, array $params = null)
     {
