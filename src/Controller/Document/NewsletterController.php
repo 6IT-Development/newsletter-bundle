@@ -153,15 +153,15 @@ class NewsletterController extends DocumentControllerBase
 
         try {
             if ($class = $request->request->get('class')) {
-            $className = '\\Pimcore\\Model\\DataObject\\' . ucfirst($class) . '\\Listing';
-            /** @var Pimcore\Model\DataObject\Listing $list */
-            $list = new $className();
+                $className = '\\Pimcore\\Model\\DataObject\\' . ucfirst($class) . '\\Listing';
+                /** @var Pimcore\Model\DataObject\Listing $list */
+                $list = new $className();
 
-            $conditions = ['(newsletterActive = 1 AND newsletterConfirmed = 1)'];
-            if ($request->request->getString('objectFilterSQL')) {
-                $conditions[] = $request->request->getString('objectFilterSQL');
-            }
-            $list->setCondition(implode(' AND ', $conditions));
+                $conditions = ['(newsletterActive = 1 AND newsletterConfirmed = 1)'];
+                if ($request->request->getString('objectFilterSQL')) {
+                    $conditions[] = $request->request->getString('objectFilterSQL');
+                }
+                $list->setCondition(implode(' AND ', $conditions));
 
                 // Use getDao(), because AbstractModel::__call() method generates error log entries
                 $count = $list->getDao()->getTotalCount();
