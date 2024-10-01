@@ -46,10 +46,6 @@ class NewsletterController extends DocumentControllerBase
     /**
      * @Route("/get-data-by-id", name="getdatabyid", methods={"GET"})
      *
-     * @param Request $request
-     *
-     * @return JsonResponse
-     *
      * @throws Exception
      */
     public function getDataByIdAction(Request $request): JsonResponse
@@ -93,10 +89,6 @@ class NewsletterController extends DocumentControllerBase
     /**
      * @Route("/save", name="save", methods={"PUT", "POST"})
      *
-     * @param Request $request
-     *
-     * @return JsonResponse
-     *
      * @throws Exception
      */
     public function saveAction(Request $request): JsonResponse
@@ -108,7 +100,7 @@ class NewsletterController extends DocumentControllerBase
             throw $this->createNotFoundException('Document not found');
         }
 
-        list($task, $page, $version) = $this->saveDocument($page, $request);
+        [$task, $page, $version] = $this->saveDocument($page, $request);
         $this->saveToSession($page, $request->getSession());
 
         if ($task === self::TASK_PUBLISH || $task === self::TASK_UNPUBLISH) {
@@ -151,10 +143,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/checksql", name="checksql", methods={"POST"})
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
     public function checksqlAction(Request $request): JsonResponse
     {
@@ -164,7 +152,8 @@ class NewsletterController extends DocumentControllerBase
         $success = false;
 
         try {
-            $className = '\\Pimcore\\Model\\DataObject\\' . ucfirst($request->request->getString('class')) . '\\Listing';
+            if ($class = $request->request->get('class')) {
+            $className = '\\Pimcore\\Model\\DataObject\\' . ucfirst($class) . '\\Listing';
             /** @var Pimcore\Model\DataObject\Listing $list */
             $list = new $className();
 
@@ -174,9 +163,11 @@ class NewsletterController extends DocumentControllerBase
             }
             $list->setCondition(implode(' AND ', $conditions));
 
-            $count = $list->getTotalCount();
-            $success = true;
-        } catch (Exception $e) {
+                // Use getDao(), because AbstractModel::__call() method generates error log entries
+                $count = $list->getDao()->getTotalCount();
+                $success = true;
+            }
+        } catch (Exception) {
         }
 
         return $this->adminJson([
@@ -187,8 +178,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/get-available-classes", name="getavailableclasses", methods={"GET"})
-     *
-     * @return JsonResponse
      */
     public function getAvailableClassesAction(): JsonResponse
     {
@@ -217,10 +206,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/get-available-reports", name="getavailablereports", methods={"GET"})
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
     public function getAvailableReportsAction(Request $request): JsonResponse
     {
@@ -259,10 +244,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/get-send-status", name="getsendstatus", methods={"GET"})
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
     public function getSendStatusAction(Request $request): JsonResponse
     {
@@ -282,10 +263,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/stop-send", name="stopsend", methods={"POST"})
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
     public function stopSendAction(Request $request): JsonResponse
     {
@@ -304,11 +281,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/send", name="send", methods={"POST"})
-     *
-     * @param Request $request
-     * @param MessageBusInterface $messengerBusPimcoreCore
-     *
-     * @return JsonResponse
      *
      * @throws Exception
      */
@@ -342,10 +314,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/calculate", name="calculate", methods={"POST"})
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
     public function calculateAction(Request $request): JsonResponse
     {
@@ -373,10 +341,6 @@ class NewsletterController extends DocumentControllerBase
 
     /**
      * @Route("/send-test", name="sendtest", methods={"POST"})
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      *
      * @throws Exception
      */

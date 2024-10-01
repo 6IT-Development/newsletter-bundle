@@ -61,9 +61,6 @@ final class ReportAdapter implements AddressSourceAdapterInterface
         return $this->list;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMailAddressesForBatchSending(): array
     {
         if (!$this->list) {
@@ -78,9 +75,6 @@ final class ReportAdapter implements AddressSourceAdapterInterface
         return $containers;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParamsForTestSending(string $emailAddress): SendingParamContainer
     {
         if (!$this->list) {
@@ -90,9 +84,6 @@ final class ReportAdapter implements AddressSourceAdapterInterface
         return new SendingParamContainer($emailAddress, current($this->list));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTotalRecordCount(): int
     {
         if (!$this->list) {
@@ -102,9 +93,6 @@ final class ReportAdapter implements AddressSourceAdapterInterface
         return $this->elementsTotal;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParamsForSingleSending(int $limit, int $offset): array
     {
         if (!$this->list) {

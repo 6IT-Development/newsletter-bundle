@@ -41,8 +41,6 @@ class Newsletter
     protected DataObject\ClassDefinition $class;
 
     /**
-     * @param string $classId
-     *
      * @throws Exception
      */
     public function __construct(string $classId)
@@ -63,12 +61,6 @@ class Newsletter
     }
 
     /**
-     * @param NewsletterDocument $newsletterDocument
-     * @param SendingParamContainer|null $sendingContainer
-     * @param string|null $hostUrl
-     *
-     * @return Mail
-     *
      * @throws Exception
      */
     public static function prepareMail(
@@ -150,9 +142,6 @@ class Newsletter
     }
 
     /**
-     * @param Mail $mail
-     * @param SendingParamContainer $sendingContainer
-     *
      * @throws Exception
      */
     public static function sendNewsletterDocumentBasedMail(Mail $mail, SendingParamContainer $sendingContainer): void
@@ -235,10 +224,6 @@ class Newsletter
     }
 
     /**
-     * @param array $params
-     *
-     * @return DataObject\Concrete
-     *
      * @throws Exception
      */
     public function subscribe(array $params): DataObject\Concrete
@@ -302,10 +287,6 @@ class Newsletter
     }
 
     /**
-     * @param DataObject\Concrete $object
-     * @param Email $mailDocument
-     * @param array $params
-     *
      * @throws Exception
      */
     public function sendConfirmationMail(DataObject\Concrete $object, Email $mailDocument, array $params = []): void
@@ -365,10 +346,6 @@ class Newsletter
     }
 
     /**
-     * @param string $token
-     *
-     * @return bool
-     *
      * @throws Exception
      */
     public function confirm(string $token): bool
@@ -394,10 +371,6 @@ class Newsletter
     }
 
     /**
-     * @param string $token
-     *
-     * @return bool
-     *
      * @throws Exception
      */
     public function unsubscribeByToken(string $token): bool
@@ -412,10 +385,6 @@ class Newsletter
     }
 
     /**
-     * @param string $email
-     *
-     * @return bool
-     *
      * @throws Exception
      */
     public function unsubscribeByEmail(string $email): bool
@@ -434,10 +403,6 @@ class Newsletter
     }
 
     /**
-     * @param DataObject\Concrete $object
-     *
-     * @return bool
-     *
      * @throws Exception
      */
     public function unsubscribe(DataObject\Concrete $object): bool
@@ -472,10 +437,6 @@ class Newsletter
     /**
      * Checks if e-mail address already
      * exists in the database.
-     *
-     * @param array $params
-     *
-     * @return bool
      */
     public function isEmailExists(array $params): bool
     {
@@ -500,13 +461,13 @@ class Newsletter
 
     /**
      * Checks if domain of email has a MX record
-     *
-     * @param string $email
-     *
-     * @return bool
      */
     public static function to_domain_exists(string $email): bool
     {
+        if (!str_contains($email, '@')) {
+            return false;
+        }
+
         [, $domain] = explode('@', $email);
 
         return checkdnsrr($domain, 'MX');

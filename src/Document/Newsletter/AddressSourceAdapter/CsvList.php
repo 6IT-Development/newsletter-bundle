@@ -32,16 +32,12 @@ final class CsvList implements AddressSourceAdapterInterface
     /**
      * IAddressSourceAdapter constructor.
      *
-     * @param array $params
      */
     public function __construct(array $params)
     {
         $this->emailAddresses = array_filter(explode(',', $params['csvList']));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMailAddressesForBatchSending(): array
     {
         $containers = [];
@@ -52,9 +48,6 @@ final class CsvList implements AddressSourceAdapterInterface
         return $containers;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParamsForTestSending(string $emailAddress): SendingParamContainer
     {
         return new SendingParamContainer($emailAddress, [
@@ -62,17 +55,11 @@ final class CsvList implements AddressSourceAdapterInterface
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTotalRecordCount(): int
     {
         return count($this->emailAddresses);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParamsForSingleSending(int $limit, int $offset): array
     {
         $addresses = array_slice($this->emailAddresses, $offset, $limit);

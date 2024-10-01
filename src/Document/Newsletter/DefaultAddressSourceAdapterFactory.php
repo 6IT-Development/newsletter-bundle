@@ -28,9 +28,6 @@ final class DefaultAddressSourceAdapterFactory implements AddressSourceAdapterFa
         $this->className = $className;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $params): AddressSourceAdapterInterface
     {
         return new $this->className($params);

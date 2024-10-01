@@ -34,9 +34,6 @@ final class ReportAddressSourceAdapterFactory implements AddressSourceAdapterFac
         $this->reportAdapterServiceLocator = $reportAdapterServiceLocator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $params): ReportAdapter|AddressSourceAdapterInterface
     {
         $config = Config::getByName($params['reportId']);

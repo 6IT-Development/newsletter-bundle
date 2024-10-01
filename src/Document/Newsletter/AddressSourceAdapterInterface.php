@@ -28,24 +28,19 @@ interface AddressSourceAdapterInterface
     /**
      * returns params to be set on mail for test sending
      *
-     * @param string $emailAddress
      *
-     * @return SendingParamContainer
      */
     public function getParamsForTestSending(string $emailAddress): SendingParamContainer;
 
     /**
      * returns total number of newsletter recipients
      *
-     * @return int
      */
     public function getTotalRecordCount(): int;
 
     /**
      * returns array of params to be set on mail for single sending
      *
-     * @param int $limit
-     * @param int $offset
      *
      * @return SendingParamContainer[]
      */
