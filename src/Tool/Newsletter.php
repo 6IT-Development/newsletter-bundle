@@ -65,8 +65,8 @@ class Newsletter
      */
     public static function prepareMail(
         NewsletterDocument $newsletterDocument,
-        SendingParamContainer $sendingContainer = null,
-        string $hostUrl = null
+        ?SendingParamContainer $sendingContainer = null,
+        ?string $hostUrl = null
     ): Mail {
         $mail = new Mail();
         $mail->setIgnoreDebugMode(true);
